@@ -1,0 +1,38 @@
+sharding:
+  jdbc:
+    dataSource:
+      names: db-test0,db-test1
+      # ��������
+      db-test0: #org.apache.tomcat.jdbc.pool.DataSource
+        type: com.alibaba.druid.pool.DruidDataSource
+        driverClassName: com.mysql.jdbc.Driver
+        url: jdbc:mysql://localhost:3306/test?useUnicode=true&characterEncoding=utf8&tinyInt1isBit=false&useSSL=false&serverTimezone=GMT
+        username: root
+        password:
+        #���������
+        maxPoolSize: 20
+      db-test1: # ���õ�һ���ӿ�
+        type: com.alibaba.druid.pool.DruidDataSource
+        driverClassName: com.mysql.jdbc.Driver
+        url: jdbc:mysql://localhost:3316/test?useUnicode=true&characterEncoding=UTF-8&allowMultiQueries=true&useSSL=false&serverTimezone=GMT
+        username: root
+        password:
+        #���������
+        maxPoolSize: 20
+    config:
+      masterslave: # ���ö�д����
+        load-balance-algorithm-type: round_robin # ���ôӿ�ѡ����ԣ��ṩ��ѯ�����������ѡ������ѯ//random ��� //round_robin ��ѯ
+        name: db1s2
+        master-data-source-name: db-test0
+        slave-data-source-names: db-test1
+    props:
+      sql: # ����SQL��ʾ��Ĭ��ֵ: false��ע�⣺�����ö�д����ʱ�����ӡ��־������
+        show: true
+
+mybatis:
+  type-aliases-package: com.example.demo.mapper
+  mapperLocations: classpath:mapper/*Mapper.xml
+
+spring:
+  main:
+    allow-bean-definition-overriding: true
