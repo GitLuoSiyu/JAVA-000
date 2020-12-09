@@ -1,0 +1,13 @@
+spring:
+  shardingsphere:
+    props:
+      sql-show: true
+    datasource:
+      names: master
+      common:
+        type: com.zaxxer.hikari.HikariDataSource
+        driver-class-name: com.mysql.cj.jdbc.Driver
+        username: root
+        password:
+      master:
+        jdbc-url: jdbc:mysql://localhost:3306/student?characterEncoding=utf8&useSSL=false&serverTimezone=Asia/Shanghai
