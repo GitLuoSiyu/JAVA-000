@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Config 3.0//EN" "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.zjh.mapper.AccountMapper">
+
+    <resultMap id="baseResultMap" type="com.zjh.entity.AccountDO">
+        <id column="id" jdbcType="BIGINT" property="id"/>
+        <result column="name" jdbcType="VARCHAR" property="name"/>
+        <result column="stock" jdbcType="BIGINT" property="stock"/>
+        <result column="lock_stock" jdbcType="BIGINT" property="lockStock"/>
+        <result column="price" jdbcType="DECIMAL" property="price"/>
+    </resultMap>
+
+    <sql id="baseColumnList">
+        name,stock,lock_stock,price
+    </sql>
+
+    <insert id="save" parameterType="com.zjh.entity.AccountDO" useGeneratedKeys="true" keyProperty="id">
+        insert into t_account
+        (<include refid="baseColumnList"/>)
+        values
+        ( #{account.name}, #{account.stock}, #{account.lockStock}, #{account.price})
+    </insert>
+
+    <select id="selectById" resultMap="baseResultMap">
+        select * from t_account where id = #{id}
+    </select>
+
+    <update id="lockStock">
+        update t_account set stock = stock - #{quantity}, lock_stock = lock_stock + #{quantity} where id = #{id}
+    </update>
+
+    <update id="unlockStockOnFailure">
+        update t_account set stock = stock + #{quantity}, lock_stock = lock_stock - #{quantity} where id = #{id}
+    </update>
+
+    <update id="unlockStockOnSuccess">
+        update t_account set lock_stock = lock_stock - #{quantity} where id = #{id}
+    </update>
+
+</mapper>
