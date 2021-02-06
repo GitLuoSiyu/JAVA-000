@@ -5,12 +5,12 @@
 #学号:G20200447010064
 #姓名:罗思雨
 #班级:1班
-#作业链接:https://github.com/GitLuoSiyu/JAVA-000/tree/main/Week_01
+#作业链接:https://github.com/GitLuoSiyu/JAVA-000/tree/main/Week_final
 
 
 ## 仓库目录结构说明
 
-1. `week01/` 代表第一周作业提交目录，以此类推。
+1. `week01/` 代表第一周作业提交目录，以此类推。s
 2. 请在对应周的目录下新建或修改自己的代码作业。
 2. 每周均有一个 `REDAME.md` 文档，你可以将自己当周的学习心得以及做题过程中的思考记录在该文档中。
 
